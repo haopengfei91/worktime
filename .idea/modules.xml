@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/worktime.iml" filepath="$PROJECT_DIR$/worktime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/worktime-server/worktime-server.iml" filepath="$PROJECT_DIR$/worktime-server/worktime-server.iml" />
+    </modules>
+  </component>
+</project>
