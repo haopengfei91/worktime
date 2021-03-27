@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 123
+    url: jdbc:mysql://localhost:3306/vhr?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    hikari:
+      pool-name: DateHikariCP
+      minimum-idle: 5
+      idle-timeout: 18000
+      maximum-pool-size: 10
+      auto-commit: true
+      max-lifetime: 180000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 127.0.0.1
+    publisher-returns: true
+    publisher-confirm-type: true
+
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    password: 123
+
+  cache:
+    cache-names: menus_cache
+server:
+  port: 8081
+  compression:
+    enabled: true
+
+fastdfs:
+  nginx:
+    host: http://192.168.91.128/
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  type-aliases-package: com.faymax.server.entity
+  configuration:
+    map-underscore-to-camel-case: false
+
+logging:
+  level:
+    com.faymax.server.mapper:debug
+
+jwt:
+  tokenHeader: Authorization
+  secret: worktime-secret
+  expiration: 604800
+  tokenHead: Bearer
