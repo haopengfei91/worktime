@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-03-24
  */
 @RestController
-@RequestMapping("/hr-role")
-public class HrRoleController {
+@RequestMapping("/hr")
+public class AdminController {
 
 }

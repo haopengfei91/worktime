@@ -23,7 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="Hr对象", description="")
-public class Hr implements Serializable, UserDetails {
+public class Admin implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
 

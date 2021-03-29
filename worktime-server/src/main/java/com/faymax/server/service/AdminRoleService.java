@@ -1,6 +1,6 @@
 package com.faymax.server.service;
 
-import com.faymax.server.entity.HrRole;
+import com.faymax.server.entity.AdminRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Faymax
  * @since 2021-03-24
  */
-public interface HrRoleService extends IService<HrRole> {
+public interface AdminRoleService extends IService<AdminRole> {
 
 }

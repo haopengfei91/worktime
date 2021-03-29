@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "HrLogin对象", description = "")
-public class HrLoginParam {
+public class AdminLoginParam {
     @ApiModelProperty(value = "用户名", required = true)
     private String username;
     @ApiModelProperty(value = "密码", required = true)

@@ -1,6 +1,6 @@
 package com.faymax.server.mapper;
 
-import com.faymax.server.entity.HrRole;
+import com.faymax.server.entity.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Faymax
  * @since 2021-03-24
  */
-public interface HrRoleMapper extends BaseMapper<HrRole> {
+public interface AdminMapper extends BaseMapper<Admin> {
 
 }

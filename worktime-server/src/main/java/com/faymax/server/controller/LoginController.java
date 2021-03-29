@@ -1,16 +1,18 @@
 package com.faymax.server.controller;
 
-import com.faymax.server.entity.HrLoginParam;
+import com.faymax.server.entity.Admin;
+import com.faymax.server.entity.AdminLoginParam;
 import com.faymax.server.entity.RespBean;
-import com.faymax.server.service.HrService;
+import com.faymax.server.service.AdminService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.security.auth.message.callback.SecretKeyCallback;
+import java.security.Principal;
 
 /**
  * @Author: Faymax
@@ -21,11 +23,29 @@ import javax.security.auth.message.callback.SecretKeyCallback;
 public class LoginController {
 
     @Autowired
-    private HrService hrService;
+    private AdminService adminService;
 
     @ApiOperation(value = "返回token")
     @PostMapping("/login")
-    public RespBean login(HrLoginParam hrLoginParam, SecretKeyCallback.Request request) {
-        return hrService.login(hrLoginParam.getUsername(), hrLoginParam.getPassword(), request);
+    public RespBean login(AdminLoginParam adminLoginParam, SecretKeyCallback.Request request) {
+        return adminService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword(), request);
+    }
+
+    @ApiOperation(value = "获取用户信息")
+    @GetMapping("/admin/info")
+    public Admin getAdmin(Principal principal) {
+        if (null == principal) {
+            return null;
+        }
+        String username = principal.getName();
+        Admin admin = adminService.getAdminByUserName(username);
+        admin.setPassword(null);
+        return admin;
+    }
+
+    @ApiOperation(value = "退出登录")
+    @PostMapping("/logout")
+    public RespBean logout() {
+        return RespBean.success("注销成功");
     }
 }

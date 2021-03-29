@@ -1,10 +1,11 @@
 package com.faymax.server.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.faymax.server.config.security.JwtTokenUtil;
-import com.faymax.server.entity.Hr;
+import com.faymax.server.entity.Admin;
 import com.faymax.server.entity.RespBean;
-import com.faymax.server.mapper.HrMapper;
-import com.faymax.server.service.HrService;
+import com.faymax.server.mapper.AdminMapper;
+import com.faymax.server.service.AdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,8 +29,10 @@ import java.util.Map;
  * @since 2021-03-24
  */
 @Service
-public class HrServiceImpl extends ServiceImpl<HrMapper, Hr> implements HrService {
+public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
 
+    @Autowired
+    private AdminMapper adminMapper;
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -59,5 +62,16 @@ public class HrServiceImpl extends ServiceImpl<HrMapper, Hr> implements HrServic
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return RespBean.success("登录成功", tokenMap);
+    }
+
+    @Override
+    public Admin getAdminByUserName(String username) {
+        if (username == null) {
+            return null;
+        }
+        Admin admin = adminMapper.selectOne(new QueryWrapper<Admin>()
+                .eq("username", username)
+                .eq("enabled", true));
+        return admin;
     }
 }
