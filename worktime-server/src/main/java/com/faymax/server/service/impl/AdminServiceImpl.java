@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.message.callback.SecretKeyCallback;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,13 +43,13 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private String tokenHead;
 
     @Override
-    public RespBean login(String username, String password, SecretKeyCallback.Request request) {
+    public RespBean login(String username, String password, HttpServletRequest request) {
         //登录
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         if (null == userDetails || !passwordEncoder.matches(password, userDetails.getPassword())) {
             return RespBean.fail("用户名或密码不正确");
         }
-        if (userDetails.isEnabled()) {
+        if (!userDetails.isEnabled()) {
             return RespBean.fail("账号被禁用，请联系管理员");
         }
         //更新登录对象

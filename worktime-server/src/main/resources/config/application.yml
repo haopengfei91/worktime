@@ -14,29 +14,29 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
 
-  rabbitmq:
-    username: guest
-    password: guest
-    host: 127.0.0.1
-    publisher-returns: true
-    publisher-confirm-type: true
+#  rabbitmq:
+#    username: guest
+#    password: guest
+#    host: 127.0.0.1
+#    publisher-returns: true
+#    publisher-confirm-type: true
 
-  redis:
-    host: 127.0.0.1
-    database: 0
-    port: 6379
-    password: 123
-
-  cache:
-    cache-names: menus_cache
+#  redis:
+#    host: 127.0.0.1
+#    database: 0
+#    port: 6379
+#    password: 123
+#
+#  cache:
+#    cache-names: menus_cache
 server:
   port: 8081
   compression:
     enabled: true
 
-fastdfs:
-  nginx:
-    host: http://192.168.91.128/
+#fastdfs:
+#  nginx:
+#    host: http://192.168.91.128/
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*Mapper.xml
@@ -46,7 +46,7 @@ mybatis-plus:
 
 logging:
   level:
-    com.faymax.server.mapper:debug
+    com.faymax.server.mapper: debug
 
 jwt:
   tokenHeader: Authorization

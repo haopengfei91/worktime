@@ -4,7 +4,7 @@ import com.faymax.server.entity.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.faymax.server.entity.RespBean;
 
-import javax.security.auth.message.callback.SecretKeyCallback;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -23,7 +23,7 @@ public interface AdminService extends IService<Admin> {
      * @param request
      * @return
      */
-    RespBean login(String username, String password, SecretKeyCallback.Request request);
+    RespBean login(String username, String password, HttpServletRequest request);
 
     /**
      * 根据用户名返回对象
