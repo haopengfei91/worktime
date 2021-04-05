@@ -1,6 +1,7 @@
 package com.faymax.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.faymax.server.config.security.JwtTokenUtil;
 import com.faymax.server.entity.Admin;
 import com.faymax.server.entity.RespBean;
@@ -43,7 +44,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private String tokenHead;
 
     @Override
-    public RespBean login(String username, String password, HttpServletRequest request) {
+    public RespBean login(String username, String password, String code, HttpServletRequest request) {
+        String captcha = (String) request.getSession().getAttribute("captcha");
+        if (StringUtils.isBlank(code) || !captcha.equalsIgnoreCase(code)) {
+            return RespBean.fail("验证码输入不正确");
+        }
         //登录
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         if (null == userDetails || !passwordEncoder.matches(password, userDetails.getPassword())) {
