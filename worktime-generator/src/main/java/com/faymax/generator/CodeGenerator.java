@@ -46,6 +46,9 @@ public class CodeGenerator {
         gc.setAuthor("Faymax");
         gc.setOpen(false);
         gc.setSwagger2(true);
+        gc.setBaseResultMap(true);
+        gc.setBaseColumnList(true);
+        gc.setFileOverride(false);
         gc.setServiceName("%sService");
         mpg.setGlobalConfig(gc);
 
