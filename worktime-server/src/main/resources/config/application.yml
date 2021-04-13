@@ -21,11 +21,18 @@ spring:
 #    publisher-returns: true
 #    publisher-confirm-type: true
 
-#  redis:
-#    host: 127.0.0.1
-#    database: 0
-#    port: 6379
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
 #    password: 123
+    connect-timeout: 10000ms
+    lettuce:
+      pool:
+        max-active: 1024
+        max-wait: 10000ms
+        max-idle: 200
+        min-idle: 5
 #
 #  cache:
 #    cache-names: menus_cache
