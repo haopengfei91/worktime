@@ -4,6 +4,8 @@ import com.faymax.server.entity.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.faymax.server.entity.Menu;
 import com.faymax.server.entity.RespBean;
+import com.faymax.server.entity.Role;
+import io.swagger.models.auth.In;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -34,5 +36,7 @@ public interface AdminService extends IService<Admin> {
      * @return
      */
     Admin getAdminByUserName(String username);
+
+    List<Role> getRolesByAdminId(Integer id);
 
 }

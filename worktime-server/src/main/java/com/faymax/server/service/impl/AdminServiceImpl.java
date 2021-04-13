@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.faymax.server.config.security.JwtTokenUtil;
 import com.faymax.server.entity.Admin;
 import com.faymax.server.entity.RespBean;
+import com.faymax.server.entity.Role;
 import com.faymax.server.mapper.AdminMapper;
+import com.faymax.server.mapper.RoleMapper;
 import com.faymax.server.service.AdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,6 +45,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
@@ -78,6 +83,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                 .eq("username", username)
                 .eq("enabled", true));
         return admin;
+    }
+
+    @Override
+    public List<Role> getRolesByAdminId(Integer id) {
+
+        return roleMapper.getRolesByAdminId(id);
     }
 
 }
