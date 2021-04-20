@@ -4,6 +4,8 @@ import com.faymax.server.entity.Position;
 import com.faymax.server.mapper.PositionMapper;
 import com.faymax.server.service.PositionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import net.bytebuddy.asm.Advice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
