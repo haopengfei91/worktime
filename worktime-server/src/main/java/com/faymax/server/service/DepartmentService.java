@@ -2,6 +2,9 @@ package com.faymax.server.service;
 
 import com.faymax.server.entity.Department;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.faymax.server.entity.RespBean;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface DepartmentService extends IService<Department> {
 
+    /**
+     * 获取所有部门
+     * @return
+     */
+    List<Department> getAllDepartments();
+
+    RespBean addDepartment(Department dep);
+
+    RespBean deleteDepartment(Integer id);
 }
