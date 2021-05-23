@@ -2,11 +2,14 @@ package com.faymax.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.faymax.server.AdminUtils;
 import com.faymax.server.config.security.JwtTokenUtil;
 import com.faymax.server.entity.Admin;
+import com.faymax.server.entity.AdminRole;
 import com.faymax.server.entity.RespBean;
 import com.faymax.server.entity.Role;
 import com.faymax.server.mapper.AdminMapper;
+import com.faymax.server.mapper.AdminRoleMapper;
 import com.faymax.server.mapper.RoleMapper;
 import com.faymax.server.service.AdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -18,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -47,6 +51,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private String tokenHead;
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private AdminRoleMapper adminRoleMapper;
 
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
@@ -89,6 +95,24 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public List<Role> getRolesByAdminId(Integer id) {
 
         return roleMapper.getRolesByAdminId(id);
+    }
+
+    @Override
+    public List<Admin> getAllAdmins(String keyWords) {
+
+        return adminMapper.getAllAdmins(AdminUtils.getCurrentAdmin().getId(), keyWords);
+    }
+
+    @Override
+    @Transactional
+    public RespBean updateAdminRole(Integer adminId, Integer[] rids) {
+
+        adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("aid", adminId));
+        Integer result = adminRoleMapper.addAdminRole(adminId, rids);
+        if (result == rids.length) {
+            return RespBean.success("更新成功");
+        }
+        return RespBean.fail("更新失败");
     }
 
 }

@@ -3,6 +3,8 @@ package com.faymax.server.mapper;
 import com.faymax.server.entity.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.faymax.server.entity.Menu;
+import com.faymax.server.entity.RespBean;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,5 +18,7 @@ import java.util.List;
  */
 public interface AdminMapper extends BaseMapper<Admin> {
 
+
+    List<Admin> getAllAdmins(@Param("id") Integer id, @Param("keywords") String keyWords);
 
 }

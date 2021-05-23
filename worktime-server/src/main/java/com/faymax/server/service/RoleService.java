@@ -1,5 +1,6 @@
 package com.faymax.server.service;
 
+import com.faymax.server.entity.RespBean;
 import com.faymax.server.entity.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
 
