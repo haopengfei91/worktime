@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.faymax.server.mapper.AdminMapper">
+
+    <resultMap id="BaseResultMap" type="com.faymax.server.entity.Admin">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="telephone" property="telephone"/>
+        <result column="address" property="address"/>
+        <result column="enabled" property="enabled"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="userface" property="userface"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <resultMap id="AdminWithRole" type="com.faymax.server.entity.Admin" extends="BaseResultMap">
+        <collection property="roles" ofType="com.faymax.server.entity.Role">
+            <id column="rid" property="id"/>
+            <result column="rname" property="name"/>
+            <result column="rnameZh" property="nameZh"/>
+        </collection>
+    </resultMap>
+
+    <!--获取所有操作员-->
+    <select id="getAllAdmins" resultMap="AdminWithRole">
+        SELECT
+            a.*,
+            r.id AS rid,
+            r.`name` AS rname,
+            r.nameZh AS rnameZh
+        FROM
+            admin a
+            LEFT JOIN admin_role ar ON a.id = ar.aid
+            LEFT JOIN role r ON r.id = ar.rid
+        WHERE
+            a.id != #{id}
+            <if test="null!=keywords and ''!=keywords">
+                AND a.`name` LIKE CONCAT('%', #{keywords}, '%')
+            </if>
+        ORDER BY
+            a.id
+    </select>
+</mapper>
