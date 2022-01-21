@@ -1,5 +1,6 @@
 package com.faymax.server.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
@@ -31,6 +32,7 @@ public class Position implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "职位")
+    @Excel(name = "职位")
     private String name;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")

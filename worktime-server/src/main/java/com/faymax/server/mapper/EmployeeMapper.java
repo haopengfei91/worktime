@@ -8,6 +8,7 @@ import com.faymax.server.entity.RespPageBean;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * <p>
@@ -24,4 +25,5 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
                                       @Param("beginDateScope") LocalDate[] beginDateScope);
 
 
+    List<Employee> getEmployee(Integer id);
 }

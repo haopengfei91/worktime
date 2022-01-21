@@ -1,5 +1,6 @@
 package com.faymax.server.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -26,6 +27,8 @@ public class Nation implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "民族")
+    @Excel(name = "民族")
     private String name;
 
 

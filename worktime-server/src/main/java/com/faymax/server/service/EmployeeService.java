@@ -6,6 +6,7 @@ import com.faymax.server.entity.RespBean;
 import com.faymax.server.entity.RespPageBean;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * <p>
@@ -22,4 +23,6 @@ public interface EmployeeService extends IService<Employee> {
     RespBean maxWorkId();
 
     RespBean addEmp(Employee employee);
+
+    List<Employee> getEmployee(Integer id);
 }
