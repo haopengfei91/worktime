@@ -10,8 +10,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * <p>
@@ -22,7 +21,9 @@ import lombok.EqualsAndHashCode;
  * @since 2021-03-24
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode(callSuper = false, of = "name")
 @TableName("job_level")
 @ApiModel(value="JobLevel对象", description="")
 public class JobLevel implements Serializable {
@@ -34,6 +35,7 @@ public class JobLevel implements Serializable {
 
     @ApiModelProperty(value = "职称名称")
     @Excel(name = "职称")
+    @NonNull
     private String name;
 
     private String titleLevel;

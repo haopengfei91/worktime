@@ -2,7 +2,9 @@ package com.faymax.server.controller;
 
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import com.faymax.server.entity.*;
 import com.faymax.server.service.*;
@@ -12,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -143,5 +146,38 @@ public class EmployeeController {
                 }
             }
         }
+    }
+
+    @ApiOperation(value = "导入员工数据")
+    @PostMapping("/import")
+    public RespBean importEmployee(MultipartFile file) {
+        ImportParams params = new ImportParams();
+        params.setTitleRows(1);
+        List<Nation> nationList = nationService.list();
+        List<Department> departmentList = departmentService.list();
+        List<Position> positionList = positionService.list();
+        List<PoliticsStatus> politicsStatusList = politicsStatusService.list();
+        List<JobLevel> jobLevelList = jobLevelService.list();
+        try {
+            List<Employee> list = ExcelImportUtil.importExcel(file.getInputStream(), Employee.class, params);
+            list.forEach(employee -> {
+                Integer nationId = nationList.get(nationList.indexOf(new Nation(employee.getNation().getName()))).getId();
+                Integer departmentId = departmentList.get(departmentList.indexOf(new Department(employee.getDepartment().getName()))).getId();
+                Integer positionId = positionList.get(positionList.indexOf(new Position(employee.getPosition().getName()))).getId();
+                Integer politicsStatusId = politicsStatusList.get(politicsStatusList.indexOf(new PoliticsStatus(employee.getPoliticsStatus().getName()))).getId();
+                Integer jobLevelId = jobLevelList.get(jobLevelList.indexOf(new JobLevel(employee.getJobLevel().getName()))).getId();
+                employee.setNationId(nationId);
+                employee.setDepartmentId(departmentId);
+                employee.setPosId(positionId);
+                employee.setPoliticId(politicsStatusId);
+                employee.setJobLevelId(jobLevelId);
+            });
+            if (employeeService.saveBatch(list)) {
+                return RespBean.success("导入成功！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return RespBean.fail("导入失败！");
     }
 }

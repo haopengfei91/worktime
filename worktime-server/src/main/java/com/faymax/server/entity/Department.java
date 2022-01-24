@@ -10,8 +10,7 @@ import java.util.List;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.models.auth.In;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,7 +23,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Data
-@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode(callSuper = false, of = "name")
 @ApiModel(value = "Department对象", description = "")
 public class Department implements Serializable {
 
@@ -35,6 +36,7 @@ public class Department implements Serializable {
 
     @ApiModelProperty(value = "部门名称")
     @Excel(name = "部门名称")
+    @NonNull
     private String name;
 
     private Integer parentId;
