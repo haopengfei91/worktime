@@ -7,13 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="worktime-server" />
         <module name="worktime-generator" />
+        <module name="worktime-server" />
+        <module name="worktime-mail" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="worktime" target="1.8" />
       <module name="worktime-generator" target="1.8" />
+      <module name="worktime-mail" target="1.8" />
       <module name="worktime-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -21,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="worktime" options="-parameters" />
       <module name="worktime-generator" options="-parameters" />
+      <module name="worktime-mail" options="-parameters" />
       <module name="worktime-server" options="-parameters" />
     </option>
   </component>

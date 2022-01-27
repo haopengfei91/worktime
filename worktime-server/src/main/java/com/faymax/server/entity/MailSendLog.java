@@ -3,6 +3,8 @@ package com.faymax.server.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDate;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,11 +41,11 @@ public class MailSendLog implements Serializable {
     private Integer count;
 
     @ApiModelProperty(value = "第一次重试时间")
-    private LocalDate tryTime;
+    private LocalDateTime tryTime;
 
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
-    private LocalDate updateTime;
+    private LocalDateTime updateTime;
 
 
 }

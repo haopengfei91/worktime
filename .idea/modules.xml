@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/worktime.iml" filepath="$PROJECT_DIR$/worktime.iml" />
       <module fileurl="file://$PROJECT_DIR$/worktime-generator/worktime-generator.iml" filepath="$PROJECT_DIR$/worktime-generator/worktime-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/worktime-mail/worktime-mail.iml" filepath="$PROJECT_DIR$/worktime-mail/worktime-mail.iml" />
       <module fileurl="file://$PROJECT_DIR$/worktime-server/worktime-server.iml" filepath="$PROJECT_DIR$/worktime-server/worktime-server.iml" />
     </modules>
   </component>

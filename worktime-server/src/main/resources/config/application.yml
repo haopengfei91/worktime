@@ -14,18 +14,19 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
 
-#  rabbitmq:
-#    username: guest
-#    password: guest
-#    host: 127.0.0.1
-#    publisher-returns: true
-#    publisher-confirm-type: true
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 127.0.0.1
+    port: 5672
+    publisher-confirm-type: correlated
+    publisher-returns: true
 
   redis:
     host: 127.0.0.1
     database: 0
     port: 6379
-#    password: 123
+    #    password: 123
     connect-timeout: 10000ms
     lettuce:
       pool:
@@ -33,6 +34,7 @@ spring:
         max-wait: 10000ms
         max-idle: 200
         min-idle: 5
+    timeout: 10000ms
 #
 #  cache:
 #    cache-names: menus_cache

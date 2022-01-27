@@ -144,8 +144,8 @@
         AND e.jobLevelId = j.id
         AND e.posId = pos.id
         <if test="null!=id">
-            AND e.id = #{id}
-        </if>
+        AND e.id = #{id}
+    </if>
         ORDER BY
         e.id
     </select>
